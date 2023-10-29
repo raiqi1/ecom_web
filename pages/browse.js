@@ -66,8 +66,8 @@ export default function browse({
           <div className={styles.browse__store_products_wrap}>
             <HeadingFilters />
             <div className={styles.browse__store_products}>
-              {products.map((p, i) => (
-                <ProductCard product={p} key={i} />
+              {products.map((p) => (
+                <ProductCard product={p} key={p._id} />
               ))}
             </div>
           </div>
