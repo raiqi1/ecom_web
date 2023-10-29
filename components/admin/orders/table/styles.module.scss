@@ -1,0 +1,48 @@
+.ver{
+    width: 35px;
+    height: 35px;
+}
+.table{
+    th{
+        text-align: center;
+    }
+    td{
+        b{
+            font-size:1rem;
+        }
+    }
+    &__img{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: $shadow-1;
+    }
+}
+.productImg{
+    height: 150px;
+    width: 100px;
+    object-fit: cover;
+    box-shadow: $shadow-1;
+}
+.head{
+    background: $blue-color;
+}
+.bodycell{
+    text-align: center;
+}
+.not_processed{
+    color: #e3503e;
+}
+.processing{
+    color: #f1c40f;
+}
+.dispatched{
+    color: #2ecc71;
+}
+.canceled{
+    color: #e74c3c;
+}
+.completed{
+    color: #3498db;
+}

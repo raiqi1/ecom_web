@@ -1,0 +1,115 @@
+.filter {
+  padding: 1rem;
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #777;
+      svg {
+        margin-left: 1rem;
+        cursor: pointer;
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+  }
+  section {
+    ul {
+      margin-left: 1rem;
+    }
+    li {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      span {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        svg {
+          width: 10px;
+          fill: #333;
+        }
+      }
+    }
+  }
+  &__sizes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+    &_size {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      span {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        svg {
+          width: 10px;
+          fill: #333;
+        }
+      }
+    }
+  }
+  &__colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    button {
+      width: 20px;
+      cursor: pointer;
+      height: 20px;
+      border-radius: 50%;
+      box-shadow: 1px 2px 5px rgba(0, 0, 0.2);
+      &:hover{
+        outline: 1px solid #000;
+        outline-offset: 3px;
+      }
+      &:focus{
+        outline: 1px solid #000;
+        outline-offset: 3px;
+      }
+    }
+  }
+  &__brand{
+    background: transparent;
+    width: 100px;
+    height: 37px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #222;
+    &:hover{
+        border: 1px solid #000;
+    }
+    img{
+        height: 29px;
+        object-fit: contain;
+    }
+    &:focus{
+        outline: 1px solid #000;
+        outline-offset: 3px;
+    }
+  }
+}

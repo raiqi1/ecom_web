@@ -1,0 +1,30 @@
+.empty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 0 1rem;
+   img{
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+   h1{
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    button{
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid #000;
+        border-radius: 0.25rem;
+        background-color: #fff;
+        cursor: pointer;
+        &:hover{
+            background-color: #000;
+            color: #fff;
+        }
+    }
+}

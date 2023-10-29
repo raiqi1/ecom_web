@@ -1,0 +1,92 @@
+.header {
+  width: 100%;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+}
+.image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.img1 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.orders {
+  nav {
+    margin-top: 2rem;
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    li {
+      a {
+        color: #000;
+        font-weight: 100;
+        &:hover {
+          border-bottom: 1px solid #000;
+        }
+      }
+    }
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    thead {
+      tr {
+        background-color: #000;
+        color: #fff;
+        text-align-last: center;
+      }
+    }
+    th,
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      //   background:blueviolet ;
+    }
+    tbody {
+      tr {
+        background-color: #fff;
+        color: #000;
+        td {
+          text-align: center;
+          svg {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            &:hover {
+              color: red;
+            }
+          }
+        }
+        &:hover {
+          background-color: #f5f5f5;
+        }
+      }
+    }
+  }
+}
+
+.active {
+  border-bottom: 1px solid #000;
+}
+.button {
+  width: 150px;
+  height: 50px;
+  color: #fff;
+  font-weight: 600;
+  background: #000;
+  cursor: pointer;
+  margin: 2rem 0 0 1rem;
+}
+.disabled {
+  cursor: not-allowed;
+  background: #eee;
+}
