@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import styles from "../styles/signin.module.scss";
@@ -6,8 +7,6 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 import Link from "next/link";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import LoginInput from "../components/input/loginInput";
-import CircledIconBtn from "../components/buttons/circledIconBtn";
 import {
   getCsrfToken,
   getProviders,
@@ -16,6 +15,8 @@ import {
 } from "next-auth/react";
 import axios from "axios";
 import DotLoaderSpinner from "../components/loaders/dotLoader";
+import CircledIconBtn from "../components/buttons/circledIconBtn";
+
 import Router from "next/router";
 
 const initialValues = {
@@ -31,8 +32,8 @@ const initialValues = {
 };
 
 export default function signin({ providers, callbackUrl, csrfToken }) {
-  const [loading, setLoading] = React.useState(false);
-  const [user, setUser] = React.useState(initialValues);
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(initialValues);
   const {
     login_email,
     login_password,
@@ -71,9 +72,9 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
       .email("Enter a valid email address."),
     password: Yup.string()
       .required(
-        "Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &)."
+        "Enter a combination of at least six numbers, letters and punctuation marks (such as ! and &)."
       )
-      .min(6, "Password must be atleast 6 characters.")
+      .min(6, "Password must be at least 6 characters.")
       .max(36, "Password can't be more than 36 characters"),
     password_confirmation: Yup.string()
       .required("Confirm your password.")
@@ -90,7 +91,13 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
       });
       setUser({ ...user, error: "", success: data.message });
       setLoading(false);
-      setTimeout(() => {
+      setTimeout(async () => {
+        let options = {
+          redirect: false,
+          email: email,
+          password: password,
+        };
+        const res = await signIn("credentials", options);
         Router.push("/");
       }, 2000);
     } catch (error) {
@@ -109,6 +116,7 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
     const res = await signIn("credentials", options);
     setUser({ ...user, error: "", success: "" });
     setLoading(false);
+    Router.push("/");
     if (res?.error) {
       setLoading(false);
       setUser({ ...user, success: "", login_error: res?.error });
@@ -128,13 +136,13 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
               <BiLeftArrowAlt />
             </div>
             <span>
-              We'd be happy to join us ! <Link href="/">Go Store</Link>
+              Wed be happy to join us! <Link href="/">Go Store</Link>
             </span>
           </div>
           <div className={styles.login__form}>
             <h1>Sign in</h1>
             <p>
-              Get access to one of the best Eshopping services in the world.
+              Get access to one of the best E-shopping services in the world.
             </p>
             <Formik
               enableReinitialize
@@ -151,18 +159,18 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
                     name="csrfToken"
                     defaultValue={csrfToken}
                   />
-                  <LoginInput
+                  <input
                     type="text"
                     name="login_email"
-                    icon="email"
                     placeholder="Email Address"
+                    value={login_email}
                     onChange={handleChange}
                   />
-                  <LoginInput
+                  <input
                     type="password"
                     name="login_password"
-                    icon="password"
                     placeholder="Your Password"
+                    value={login_password}
                     onChange={handleChange}
                   />
                   <CircledIconBtn type="submit" text="Sign in" />
@@ -203,7 +211,7 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
           <div className={styles.login__form}>
             <h1>Sign Up</h1>
             <p>
-              Get access to one of the best Eshopping services in the world.
+              Get access to one of the best E-shopping services in the world.
             </p>
             <Formik
               enableReinitialize
@@ -213,32 +221,32 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
             >
               {(form) => (
                 <Form>
-                  <LoginInput
+                  <input
                     type="text"
                     name="name"
-                    icon="user"
                     placeholder="Enter Full Name"
+                    value={name}
                     onChange={handleChange}
                   />
-                  <LoginInput
+                  <input
                     type="text"
                     name="email"
-                    icon="email"
                     placeholder="Email Address"
+                    value={email}
                     onChange={handleChange}
                   />
-                  <LoginInput
+                  <input
                     type="password"
                     name="password"
-                    icon="password"
                     placeholder="Your Password"
+                    value={password}
                     onChange={handleChange}
                   />
-                  <LoginInput
+                  <input
                     type="password"
                     name="password_confirmation"
-                    icon="password"
                     placeholder="Re-Type Your Password"
+                    value={password_confirmation}
                     onChange={handleChange}
                   />
                   <CircledIconBtn type="submit" text="Sign Up" />
@@ -254,7 +262,6 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
     </>
   );
 }
-
 export async function getServerSideProps(context) {
   const { req, query } = context;
   const session = await getSession({ req });
@@ -268,9 +275,9 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const crsfToken = await getCsrfToken(context);
+  const csrfToken = await getCsrfToken(context);
   const providers = Object.values(await getProviders());
   return {
-    props: { providers, crsfToken, callbackUrl },
+    props: { providers, csrfToken, callbackUrl },
   };
 }

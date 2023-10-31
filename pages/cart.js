@@ -40,22 +40,24 @@ export default function cart() {
     );
   }, [selected]);
 
-  // useEffect(() => {
-  //   const update = async () => {
-  //     const { data } = await axios.post("/api/updateCart", {
-  //       products: cart.cartItems,
-  //     });
-  //     dispatch(updateCart(data));
-  //   };
-  //   if (cart?.cartItems?.length > 0) {
-  //     update();
-  //   }
-  // }, [dispatch]);
+  useEffect(() => {
+    const update = async () => {
+      const { data } = await axios.post("/api/updateCart", {
+        products: cart.cartItems,
+      });
+      dispatch(updateCart(data));
+    };
+    if (cart?.cartItems?.length > 0) {
+      update();
+    }
+  }, [dispatch]);
 
   const saveCartToDbHandler = async () => {
     if (session) {
       const res = saveCart(selected);
-      Router.push("/checkout");
+      if (res) {
+        Router.push("/checkout");
+      }
     } else {
       signIn();
     }

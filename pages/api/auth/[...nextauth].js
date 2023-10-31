@@ -36,7 +36,6 @@ export default NextAuth({
         } else {
           throw new Error("Incorrect email or password");
         }
-  
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
           return user
